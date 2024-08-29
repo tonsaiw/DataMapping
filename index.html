@@ -1,13 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataMapping</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    Hello DataMapping
-    <script src="script.js"></script>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1>PDPA / International School</h1>
+      </div>
+      <div class="header-right">
+        <img src="user_logo.jpg" alt="User Profile" class="profile-pic" />
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="title">
+            <h2>Data Mapping</h2>
+        <div class="content-toolbar">
+            <button class="btn filter">Filter</button>
+            <button class="btn export">Export</button>
+            <button class="btn import">Import</button>
+            <button id="new-data-btn" class="btn new-data">+ New Data</button>
+        </div>
+        </div>
+      
+
+      <!-- Data Table -->
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Departments</th>
+            <th>Data Subject Types</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Title 1</td>
+            <td>Description</td>
+            <td>Human Resources</td>
+            <td>Employees</td>
+            <td class="actions">
+              <button class="edit">✏️</button>
+              <button class="delete">🗑️</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Title 2</td>
+            <td>Description</td>
+            <td>IT/IS</td>
+            <td>Faculty Staff</td>
+            <td class="actions">
+              <button class="edit">✏️</button>
+              <button class="delete">🗑️</button>
+            </td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+    </main>
+
+    
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
