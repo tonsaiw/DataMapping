@@ -33,7 +33,7 @@
 
       <!-- Data Table -->
       
-      <table class="data-table">
+      <table id="dataTable" class="data-table">
         <thead>
           <tr>
             <th>Title</th>
@@ -43,7 +43,7 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="tableBody">
           <tr>
             <td>Title 1</td>
             <td>Description</td>
@@ -71,7 +71,7 @@
       <!-- New Data Form -->
     
       <div id="newDataForm" class="new-data-form hidden">
-        <form>
+        <form id="newDataFormElement">
             <div class="form-header">
                 <h2>New Data</h2>
                 <div class="form-actions">
@@ -100,8 +100,6 @@
                 <option value="faculty-staff">Faculty Staff</option>
                 <option value="students">Students</option>
             </select>
-
-        
         </form>
     </div>
     </main>
