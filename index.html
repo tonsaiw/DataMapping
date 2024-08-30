@@ -26,7 +26,7 @@
             <button class="btn filter">Filter</button>
             <button class="btn export">Export</button>
             <button class="btn import">Import</button>
-            <button id="new-data-btn" class="btn new-data">+ New Data</button>
+            <button id="newDataBtn" class="btn new-data">+ New Data</button>
         </div>
         </div>
       
@@ -67,6 +67,43 @@
           <!-- Add more rows as needed -->
         </tbody>
       </table>
+
+      <!-- New Data Form -->
+    
+      <div id="newDataForm" class="new-data-form hidden">
+        <form>
+            <div class="form-header">
+                <h2>New Data</h2>
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn">Cancel</button>
+                    <button type="submit">Save</button>
+                </div>
+            </div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="Enter title">
+
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" placeholder="Enter description">
+
+            <!-- ยังขาด default option -->
+            <label for="department">Department</label>
+            <select id="department" name="department">
+                <option value="human-resources">Human Resources</option>
+                <option value="it">IT/IS</option>
+                <option value="admission">Admission</option>
+            </select>
+
+            <!-- ยังขาด default option -->
+            <label for="dataSubjectType">Data Subject Type (Optional)</label>
+            <select id="dataSubjectType" name="dataSubjectType">
+                <option value="employees">Employees</option>
+                <option value="faculty-staff">Faculty Staff</option>
+                <option value="students">Students</option>
+            </select>
+
+        
+        </form>
+    </div>
     </main>
 
     
