@@ -76,13 +76,20 @@
                     <button type="submit">Save</button>
                 </div>
             </div>
-            <label for="title">Title</label>
+            <div>
+              <label for="title">Title</label>
+            </div>
             <input type="text" id="title" name="title" placeholder="Enter title">
 
-            <label for="description">Description</label>
-            <input type="text" id="description" name="description" placeholder="Enter description">
+            <div>
+              <label for="description">Description</label>
+            </div>
+            <!-- <input type="text" id="description" name="description" placeholder="Enter description"> -->
+             <textarea name="description" id="description" placeholder="Enter description" rows="4" cols="20"></textarea>
 
-            <label for="department">Department</label>
+            <div>
+              <label for="department">Department</label>
+            </div>
             <select id="department" name="department">
                 <option value="" selected disabled hidden>Select department</option>
                 <option value="Human Resources">Human Resources</option>
@@ -90,9 +97,11 @@
                 <option value="Admission">Admission</option>
             </select>
 
-            <label for="dataSubjectType">Data Subject Type (Optional)</label>
-            <select id="dataSubjectType" name="dataSubjectType">
-                <option value="" selected disabled hidden>Select Data Subject Type</option>
+            <div>
+              <label for="dataSubjectType">Data Subject Type (Optional)</label>
+            </div>
+            <select id="dataSubjectType" name="dataSubjectType" data-placeholder="Select Data Subject Type" multiple>
+                <!-- <option value="" selected disabled hidden>Select Data Subject Type</option> -->
                 <option value="Employees">Employees</option>
                 <option value="Faculty Staff">Faculty Staff</option>
                 <option value="Students">Students</option>
