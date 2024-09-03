@@ -1,13 +1,15 @@
 // CLICK new data button = show form
 document.getElementById("newDataBtn").addEventListener("click", function () {
   document.getElementById("newDataForm").classList.remove("hidden");
+  document.getElementById("overlay").classList.remove("hidden");
 });
 
 // CLICK cancel button in form = hide form
-document.getElementById("cancelBtn").addEventListener("click", function () {
-  document.getElementById("newDataForm").classList.add("hidden");
-  document.getElementById("newDataFormElement").reset(); // Clear form values
-});
+// document.getElementById("cancelBtn").addEventListener("click", function () {
+//   document.getElementById("newDataForm").classList.add("hidden");
+//   document.getElementById("newDataFormElement").reset(); // Clear form values
+//   document.getElementById("overlay").classList.add("hidden");
+// });
 
 // CLICK outside of form = hide form
 document.addEventListener("click", function (event) {
@@ -104,6 +106,7 @@ attachEditEventListeners();
 document.getElementById("filterToggle").addEventListener("click", function () {
   const filterForm = document.getElementById("filterForm");
   filterForm.classList.toggle("hidden");
+  document.getElementById("overlay").classList.remove("hidden");
 });
 
 // Apply Filter Logic
@@ -161,3 +164,19 @@ document
       row.style.display = "";
     });
   });
+
+// Click overlay background = hide all form
+document.getElementById("overlay").addEventListener("click", function () {
+  document.getElementById("overlay").classList.add("hidden");
+  if (
+    document.getElementById("newDataForm").classList.contains("hidden") == false
+  ) {
+    document.getElementById("newDataForm").classList.add("hidden");
+    document.getElementById("newDataFormElement").reset();
+  }
+  if (
+    document.getElementById("filterForm").classList.contains("hidden") == false
+  ) {
+    document.getElementById("filterForm").classList.add("hidden");
+  }
+});

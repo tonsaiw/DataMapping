@@ -123,8 +123,7 @@ body {
   position: fixed;
   right: 0;
   top: 0;
-  /* change width to responsive */
-  width: 300px;
+  width: 30%;
   height: 100%;
   background-color: #f4f4f4;
   padding: 20px;
@@ -140,10 +139,20 @@ li {
   position: fixed;
   right: 0;
   top: 0;
-  /* change width to responsive */
-  width: 300px;
+  width: 30%;
   height: 100%;
   background-color: #f4f4f4;
   padding: 20px;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* overlay background*/
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
 }
