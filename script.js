@@ -1,72 +1,101 @@
-// Show form when click new data button
+// CLICK new data button = show form
 document.getElementById("newDataBtn").addEventListener("click", function () {
   document.getElementById("newDataForm").classList.remove("hidden");
 });
 
-// Hide form when click cancel button
+// CLICK cancel button in form = hide form
 document.getElementById("cancelBtn").addEventListener("click", function () {
   document.getElementById("newDataForm").classList.add("hidden");
+  document.getElementById("newDataFormElement").reset(); // Clear form values
 });
 
-// Hide form when click outside of form
+// CLICK outside of form = hide form
 document.addEventListener("click", function (event) {
   const newDataForm = document.getElementById("newDataForm");
   const newDataBtn = document.getElementById("newDataBtn");
-
   if (
     !newDataForm.contains(event.target) &&
-    !newDataBtn.contains(event.target)
+    !newDataBtn.contains(event.target) &&
+    !event.target.classList.contains("edit-btn")
   ) {
     newDataForm.classList.add("hidden");
+    document.getElementById("newDataFormElement").reset();
   }
 });
 
-// Add new row to table on form submit
+// CLICK delete button(🗑️) = delete row
+document
+  .getElementById("tableBody")
+  .addEventListener("click", function (event) {
+    if (event.target.classList.contains("delete-btn")) {
+      event.target.parentElement.parentElement.remove();
+    }
+  });
+
+// CLICK edit button = edit row
+let editRow = null;
+function attachEditEventListeners() {
+  const editButtons = document.querySelectorAll(".edit-btn");
+  editButtons.forEach((button) => {
+    button.addEventListener("click", function (event) {
+      editRow = event.target.parentElement.parentElement; // Get the row that contains the clicked Edit button
+      const rowData = Array.from(editRow.children); // create array of all children in row
+
+      // Add the data from the row-edit to the form
+      document.getElementById("title").value = rowData[0].textContent;
+      document.getElementById("description").value = rowData[1].textContent;
+      document.getElementById("department").value = rowData[2].textContent;
+      document.getElementById("dataSubjectType").value = rowData[3].textContent;
+
+      // Show the form to edit the data
+      document.getElementById("newDataForm").classList.remove("hidden");
+    });
+  });
+}
+
+// CLICK submit in form = adding new data and editing existing data
 document
   .getElementById("newDataFormElement")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
 
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     const department = document.getElementById("department").value;
     const dataSubjectType = document.getElementById("dataSubjectType").value;
 
-    // Create a new row
-    const newRow = document.createElement("tr");
+    if (editRow) {
+      // If submit editing, update the row data
+      editRow.children[0].textContent = title;
+      editRow.children[1].textContent = description;
+      editRow.children[2].textContent = department;
+      editRow.children[3].textContent = dataSubjectType;
+      editRow = null; // Reset editRow after editing
+    } else {
+      // create a new row
+      const tableBody = document.getElementById("tableBody");
+      const newRow = document.createElement("tr");
 
-    // Create cells for the row
-    const titleCell = document.createElement("td");
-    titleCell.textContent = title;
+      newRow.innerHTML = `
+        <td>${title}</td>
+        <td>${description}</td>
+        <td>${department}</td>
+        <td>${dataSubjectType}</td>
+        <td class="actions">
+          <button class="edit-btn">✏️</button>
+            <button class="delete-btn">🗑️</button>
+        </td>
+      `;
+      tableBody.appendChild(newRow);
 
-    const descriptionCell = document.createElement("td");
-    descriptionCell.textContent = description;
+      // Attach event listeners to the new buttons
+      attachEditEventListeners();
+    }
 
-    const departmentCell = document.createElement("td");
-    departmentCell.textContent = department;
-
-    const dataSubjectTypeCell = document.createElement("td");
-    dataSubjectTypeCell.textContent = dataSubjectType;
-
-    // create action cell
-    const actionsCell = document.createElement("td");
-    actionsCell.classList.add("actions");
-    actionsCell.innerHTML = `<button class="edit">✏️</button>`;
-    actionsCell.innerHTML += `<button class="delete">🗑️</button>`;
-
-    // Append cells to the row
-    newRow.appendChild(titleCell);
-    newRow.appendChild(descriptionCell);
-    newRow.appendChild(departmentCell);
-    newRow.appendChild(dataSubjectTypeCell);
-    newRow.appendChild(actionsCell);
-
-    // Append the new row to the table
-    document.getElementById("tableBody").appendChild(newRow);
-
-    // Clear form values
-    document.getElementById("newDataFormElement").reset();
-
-    // Hide the form
+    // Hide the form and reset inputs
     document.getElementById("newDataForm").classList.add("hidden");
+    document.getElementById("newDataFormElement").reset();
   });
+
+// Initial call to attach Edit event listeners to any existing rows
+attachEditEventListeners();

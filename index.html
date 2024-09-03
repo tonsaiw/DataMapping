@@ -30,9 +30,7 @@
         </div>
         </div>
       
-
       <!-- Data Table -->
-      
       <table id="dataTable" class="data-table">
         <thead>
           <tr>
@@ -50,8 +48,8 @@
             <td>Human Resources</td>
             <td>Employees</td>
             <td class="actions">
-              <button class="edit">✏️</button>
-              <button class="delete">🗑️</button>
+              <button class="edit-btn">✏️</button>
+              <button class="delete-btn">🗑️</button>
             </td>
           </tr>
           <tr>
@@ -60,8 +58,8 @@
             <td>IT/IS</td>
             <td>Faculty Staff</td>
             <td class="actions">
-              <button class="edit">✏️</button>
-              <button class="delete">🗑️</button>
+              <button class="edit-btn">✏️</button>
+              <button class="delete-btn">🗑️</button>
             </td>
           </tr>
           <!-- Add more rows as needed -->
@@ -69,7 +67,6 @@
       </table>
 
       <!-- New Data Form -->
-    
       <div id="newDataForm" class="new-data-form hidden">
         <form id="newDataFormElement">
             <div class="form-header">
@@ -85,26 +82,24 @@
             <label for="description">Description</label>
             <input type="text" id="description" name="description" placeholder="Enter description">
 
-            <!-- ยังขาด default option -->
             <label for="department">Department</label>
             <select id="department" name="department">
-                <option value="human-resources">Human Resources</option>
-                <option value="it">IT/IS</option>
-                <option value="admission">Admission</option>
+                <option value="" selected disabled hidden>Select department</option>
+                <option value="Human Resources">Human Resources</option>
+                <option value="IT/IS">IT/IS</option>
+                <option value="Admission">Admission</option>
             </select>
 
-            <!-- ยังขาด default option -->
             <label for="dataSubjectType">Data Subject Type (Optional)</label>
             <select id="dataSubjectType" name="dataSubjectType">
-                <option value="employees">Employees</option>
-                <option value="faculty-staff">Faculty Staff</option>
-                <option value="students">Students</option>
+                <option value="" selected disabled hidden>Select Data Subject Type</option>
+                <option value="Employees">Employees</option>
+                <option value="Faculty Staff">Faculty Staff</option>
+                <option value="Students">Students</option>
             </select>
         </form>
     </div>
-    </main>
-
-    
+    </main> 
   </div>
   <script src="script.js"></script>
 </body>

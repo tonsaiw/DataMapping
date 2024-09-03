@@ -108,14 +108,13 @@ body {
   gap: 10px;
 }
 
-button.edit, button.delete {
+.edit-btn, .delete-btn {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
 /* Form New Data */
-
 .hidden {
   display: none;
 }
