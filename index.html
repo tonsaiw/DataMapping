@@ -23,7 +23,7 @@
         <div class="title">
             <h2>Data Mapping</h2>
         <div class="content-toolbar">
-            <button class="btn filter">Filter</button>
+            <button class="btn filter" id="filterToggle">Filter</button>
             <button class="btn export">Export</button>
             <button class="btn import">Import</button>
             <button id="newDataBtn" class="btn new-data">+ New Data</button>
@@ -107,6 +107,28 @@
                 <option value="Students">Students</option>
             </select>
         </form>
+    </div>
+    <div id="filterForm" class="filter-form hidden">
+      <h3>Filter Data</h3>
+      <div class="filter-group">
+        <label for="filterDepartments">Department:</label>
+        <ul id="filterDepartments">
+          <li none><input type="checkbox" value="Human Resources"> Human Resources</li>
+          <li><input type="checkbox" value="IT/IS"> IT/IS</li>
+          <li><input type="checkbox" value="Admission"> Admission</li>
+          <li><input type="checkbox" value="Marketing"> Marketing</li>
+        </ul>
+      </div>
+      <div class="filter-group">
+        <label for="filterDataSubjectType">Data Subject Type:</label>
+        <ul id="filterDataSubjectType">
+          <li><input type="checkbox" value="Employees"> Employees</li>
+          <li><input type="checkbox" value="Faculty Staff"> Faculty Staff</li>
+          <li><input type="checkbox" value="Students"> Students</li>
+        </ul>
+      </div>
+      <button id="applyFilterBtn" class="btn apply-filter">Apply Filter</button>
+      <button id="resetFilterBtn" class="btn reset-filter">Reset</button>
     </div>
     </main> 
   </div>

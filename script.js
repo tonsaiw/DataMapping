@@ -99,3 +99,65 @@ document
 
 // Initial call to attach Edit event listeners to any existing rows
 attachEditEventListeners();
+
+// Toggle Filter Form
+document.getElementById("filterToggle").addEventListener("click", function () {
+  const filterForm = document.getElementById("filterForm");
+  filterForm.classList.toggle("hidden");
+});
+
+// Apply Filter Logic
+document
+  .getElementById("applyFilterBtn")
+  .addEventListener("click", function () {
+    const selectedDepartments = Array.from(
+      document.querySelectorAll("#filterDepartments input:checked")
+    ).map((checkbox) => checkbox.value);
+    console.log("selectedDepartments : ", selectedDepartments);
+
+    const selectedDataSubjects = Array.from(
+      document.querySelectorAll("#filterDataSubjectType input:checked")
+    ).map((checkbox) => checkbox.value);
+    console.log("selectedDataSubjects : ", selectedDataSubjects);
+
+    const table = document.getElementById("dataTable");
+    const rows = table.querySelectorAll("tbody tr");
+    console.log("rows : ", rows);
+
+    rows.forEach((row) => {
+      const department = row.children[2].textContent;
+      const dataSubject = row.children[3].textContent;
+
+      const departmentMatch =
+        selectedDepartments.length === 0 ||
+        selectedDepartments.includes(department);
+      const dataSubjectMatch =
+        selectedDataSubjects.length === 0 ||
+        selectedDataSubjects.includes(dataSubject);
+
+      if (departmentMatch && dataSubjectMatch) {
+        row.style.display = ""; // Show row if matches
+      } else {
+        row.style.display = "none"; // Hide row if doesn't match
+      }
+    });
+  });
+
+// Reset Filter Logic
+document
+  .getElementById("resetFilterBtn")
+  .addEventListener("click", function () {
+    // Uncheck all checkboxes
+    document
+      .querySelectorAll("#filterDepartments input")
+      .forEach((checkbox) => (checkbox.checked = false));
+    document
+      .querySelectorAll("#filterDataSubjectType input")
+      .forEach((checkbox) => (checkbox.checked = false));
+
+    // Show all rows again
+    const rows = document.querySelectorAll("#dataTable tbody tr");
+    rows.forEach((row) => {
+      row.style.display = "";
+    });
+  });
