@@ -49,6 +49,9 @@ function attachEditEventListeners() {
       document.getElementById("department").value = rowData[2].textContent;
       document.getElementById("dataSubjectType").value = rowData[3].textContent;
 
+      // Change title of form to "Edit Data"
+      document.getElementById("formTitle").textContent = "Edit Data";
+
       // Show the form to edit the data
       document.getElementById("newDataForm").classList.remove("hidden");
     });
