@@ -89,7 +89,7 @@ document
         <td class="actions">
           <button class="edit-btn">✏️</button>
             <button class="delete-btn">🗑️</button>
-        </td>
+        </td> 
       `;
       tableBody.appendChild(newRow);
 
@@ -100,6 +100,7 @@ document
     // Hide the form and reset inputs
     document.getElementById("newDataForm").classList.add("hidden");
     document.getElementById("newDataFormElement").reset();
+    document.getElementById("overlay").classList.add("hidden");
   });
 
 // Initial call to attach Edit event listeners to any existing rows
@@ -126,11 +127,15 @@ document
     ).map((checkbox) => checkbox.value);
     console.log("selectedDataSubjects : ", selectedDataSubjects);
 
+    const searchTitle = document.getElementById("filterTitle").value.trim();
+    const regex = new RegExp(searchTitle, "i"); // Case-insensitive regex
+
     const table = document.getElementById("dataTable");
     const rows = table.querySelectorAll("tbody tr");
     console.log("rows : ", rows);
 
     rows.forEach((row) => {
+      const title = row.children[0].textContent;
       const department = row.children[2].textContent;
       const dataSubject = row.children[3].textContent;
 
@@ -140,8 +145,9 @@ document
       const dataSubjectMatch =
         selectedDataSubjects.length === 0 ||
         selectedDataSubjects.includes(dataSubject);
+      const titleMatch = searchTitle === "" || regex.test(title);
 
-      if (departmentMatch && dataSubjectMatch) {
+      if (departmentMatch && dataSubjectMatch && titleMatch) {
         row.style.display = ""; // Show row if matches
       } else {
         row.style.display = "none"; // Hide row if doesn't match
@@ -160,6 +166,9 @@ document
     document
       .querySelectorAll("#filterDataSubjectType input")
       .forEach((checkbox) => (checkbox.checked = false));
+
+    // Clear the search input
+    document.getElementById("filterTitle").value = "";
 
     // Show all rows again
     const rows = document.querySelectorAll("#dataTable tbody tr");
