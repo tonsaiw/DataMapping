@@ -6,6 +6,7 @@ document.getElementById("newDataBtn").addEventListener("click", function () {
 
 // CLICK cancel button in form = hide form
 document.getElementById("cancelBtn").addEventListener("click", function () {
+  document.getElementById("formTitle").textContent = "New Data";
   document.getElementById("newDataForm").classList.add("hidden");
   document.getElementById("newDataFormElement").reset(); // Clear form values
   document.getElementById("overlay").classList.add("hidden");
@@ -102,6 +103,9 @@ document
     document.getElementById("newDataForm").classList.add("hidden");
     document.getElementById("newDataFormElement").reset();
     document.getElementById("overlay").classList.add("hidden");
+
+    // Change title of form back to "New Data"
+    document.getElementById("formTitle").textContent = "New Data";
   });
 
 // Initial call to attach Edit event listeners to any existing rows
@@ -192,4 +196,5 @@ document.getElementById("overlay").addEventListener("click", function () {
   ) {
     document.getElementById("filterForm").classList.add("hidden");
   }
+  document.getElementById("formTitle").textContent = "New Data";
 });
