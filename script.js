@@ -54,6 +54,7 @@ function attachEditEventListeners() {
 
       // Show the form to edit the data
       document.getElementById("newDataForm").classList.remove("hidden");
+      document.getElementById("overlay").classList.remove("hidden");
     });
   });
 }
