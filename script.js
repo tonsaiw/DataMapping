@@ -5,25 +5,25 @@ document.getElementById("newDataBtn").addEventListener("click", function () {
 });
 
 // CLICK cancel button in form = hide form
-// document.getElementById("cancelBtn").addEventListener("click", function () {
-//   document.getElementById("newDataForm").classList.add("hidden");
-//   document.getElementById("newDataFormElement").reset(); // Clear form values
-//   document.getElementById("overlay").classList.add("hidden");
-// });
+document.getElementById("cancelBtn").addEventListener("click", function () {
+  document.getElementById("newDataForm").classList.add("hidden");
+  document.getElementById("newDataFormElement").reset(); // Clear form values
+  document.getElementById("overlay").classList.add("hidden");
+});
 
 // CLICK outside of form = hide form
-document.addEventListener("click", function (event) {
-  const newDataForm = document.getElementById("newDataForm");
-  const newDataBtn = document.getElementById("newDataBtn");
-  if (
-    !newDataForm.contains(event.target) &&
-    !newDataBtn.contains(event.target) &&
-    !event.target.classList.contains("edit-btn")
-  ) {
-    newDataForm.classList.add("hidden");
-    document.getElementById("newDataFormElement").reset();
-  }
-});
+// document.addEventListener("click", function (event) {
+//   const newDataForm = document.getElementById("newDataForm");
+//   const newDataBtn = document.getElementById("newDataBtn");
+//   if (
+//     !newDataForm.contains(event.target) &&
+//     !newDataBtn.contains(event.target) &&
+//     !event.target.classList.contains("edit-btn")
+//   ) {
+//     newDataForm.classList.add("hidden");
+//     document.getElementById("newDataFormElement").reset();
+//   }
+// });
 
 // CLICK delete button(🗑️) = delete row
 document
