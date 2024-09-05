@@ -97,14 +97,16 @@
                 <option value="Admission">Admission</option>
             </select>
 
+            <!-- multi-select dataSubjectType -->
             <div>
               <label for="dataSubjectType">Data Subject Type (Optional)</label>
             </div>
-            <select id="dataSubjectType" name="dataSubjectType" data-placeholder="Select Data Subject Type" multiple>
-                <!-- <option value="" selected disabled hidden>Select Data Subject Type</option> -->
-                <option value="Employees">Employees</option>
-                <option value="Faculty Staff">Faculty Staff</option>
-                <option value="Students">Students</option>
+            <div id="tags-container" class="tags-container"></div>
+            <select id="dataSubjectType" name="dataSubjectType" >
+              <option value="" selected disabled hidden>Select Data Subject Type</option>
+              <option value="Employees">Employees</option>
+              <option value="Faculty Staff">Faculty Staff</option>
+              <option value="Students">Students</option>
             </select>
         </form>
     </div>

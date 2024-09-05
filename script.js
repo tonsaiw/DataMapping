@@ -1,30 +1,43 @@
+// Initalize editRow to null for tracking which row is being edited
+let editRow = null;
+
+// Initialize an empty array to store selected tags
+let selectedTags = [];
+
 // CLICK new data button = show form
 document.getElementById("newDataBtn").addEventListener("click", function () {
+  document.getElementById("formTitle").textContent = "New Data";
+  // Clear tags
+  document.getElementById("tags-container").innerHTML = "";
+  selectedTags = [];
+  document.getElementById("newDataFormElement").reset();
+  editRow = null; // Reset editRow
   document.getElementById("newDataForm").classList.remove("hidden");
   document.getElementById("overlay").classList.remove("hidden");
 });
 
 // CLICK cancel button in form = hide form
 document.getElementById("cancelBtn").addEventListener("click", function () {
-  document.getElementById("formTitle").textContent = "New Data";
   document.getElementById("newDataForm").classList.add("hidden");
-  document.getElementById("newDataFormElement").reset(); // Clear form values
   document.getElementById("overlay").classList.add("hidden");
 });
 
-// CLICK outside of form = hide form
-// document.addEventListener("click", function (event) {
-//   const newDataForm = document.getElementById("newDataForm");
-//   const newDataBtn = document.getElementById("newDataBtn");
-//   if (
-//     !newDataForm.contains(event.target) &&
-//     !newDataBtn.contains(event.target) &&
-//     !event.target.classList.contains("edit-btn")
-//   ) {
-//     newDataForm.classList.add("hidden");
-//     document.getElementById("newDataFormElement").reset();
-//   }
-// });
+// Click overlay background = hide all form
+document.getElementById("overlay").addEventListener("click", function () {
+  document.getElementById("overlay").classList.add("hidden");
+  // Case: newDataForm is open
+  if (
+    document.getElementById("newDataForm").classList.contains("hidden") == false
+  ) {
+    document.getElementById("newDataForm").classList.add("hidden");
+  }
+  // Case: filterForm is open
+  if (
+    document.getElementById("filterForm").classList.contains("hidden") == false
+  ) {
+    document.getElementById("filterForm").classList.add("hidden");
+  }
+});
 
 // CLICK delete button(🗑️) = delete row
 document
@@ -36,22 +49,41 @@ document
   });
 
 // CLICK edit button = edit row
-let editRow = null;
 function attachEditEventListeners() {
   const editButtons = document.querySelectorAll(".edit-btn");
   editButtons.forEach((button) => {
     button.addEventListener("click", function (event) {
+      // Change title of form to "Edit Data"
+      document.getElementById("formTitle").textContent = "Edit Data";
+      // Clear tags element
+      document.getElementById("tags-container").innerHTML = "";
+
       editRow = event.target.parentElement.parentElement; // Get the row that contains the clicked Edit button
-      const rowData = Array.from(editRow.children); // create array of all children in row
+      const rowData = Array.from(editRow.children); // create array of all children element in row
 
       // Add the data from the row-edit to the form
       document.getElementById("title").value = rowData[0].textContent;
       document.getElementById("description").value = rowData[1].textContent;
       document.getElementById("department").value = rowData[2].textContent;
-      document.getElementById("dataSubjectType").value = rowData[3].textContent;
 
-      // Change title of form to "Edit Data"
-      document.getElementById("formTitle").textContent = "Edit Data";
+      selectedTags = rowData[3].textContent.split(", ");
+      selectedTags = selectedTags.filter((tag) => tag !== ""); // Remove any empty strings
+      // Add the tags to the form
+      selectedTags.forEach((value) => {
+        // Create a tag element
+        const tagElement = document.createElement("div");
+        tagElement.classList.add("tag");
+        tagElement.setAttribute("data-value", value);
+        tagElement.innerHTML = `${value} <span class="remove-tag">x</span>`;
+
+        // Add remove-tag event listener when click on x
+        tagElement
+          .querySelector(".remove-tag")
+          .addEventListener("click", function () {
+            toggleTag(value);
+          });
+        document.getElementById("tags-container").appendChild(tagElement);
+      });
 
       // Show the form to edit the data
       document.getElementById("newDataForm").classList.remove("hidden");
@@ -69,8 +101,7 @@ document
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     const department = document.getElementById("department").value;
-    const dataSubjectType = document.getElementById("dataSubjectType").value;
-
+    const dataSubjectType = selectedTags.join(", ");
     if (editRow) {
       // If submit editing, update the row data
       editRow.children[0].textContent = title;
@@ -101,7 +132,6 @@ document
 
     // Hide the form and reset inputs
     document.getElementById("newDataForm").classList.add("hidden");
-    document.getElementById("newDataFormElement").reset();
     document.getElementById("overlay").classList.add("hidden");
 
     // Change title of form back to "New Data"
@@ -125,19 +155,16 @@ document
     const selectedDepartments = Array.from(
       document.querySelectorAll("#filterDepartments input:checked")
     ).map((checkbox) => checkbox.value);
-    console.log("selectedDepartments : ", selectedDepartments);
 
     const selectedDataSubjects = Array.from(
       document.querySelectorAll("#filterDataSubjectType input:checked")
     ).map((checkbox) => checkbox.value);
-    console.log("selectedDataSubjects : ", selectedDataSubjects);
 
     const searchTitle = document.getElementById("filterTitle").value.trim();
     const regex = new RegExp(searchTitle, "i"); // Case-insensitive regex
 
     const table = document.getElementById("dataTable");
     const rows = table.querySelectorAll("tbody tr");
-    console.log("rows : ", rows);
 
     rows.forEach((row) => {
       const title = row.children[0].textContent;
@@ -182,19 +209,48 @@ document
     });
   });
 
-// Click overlay background = hide all form
-document.getElementById("overlay").addEventListener("click", function () {
-  document.getElementById("overlay").classList.add("hidden");
-  if (
-    document.getElementById("newDataForm").classList.contains("hidden") == false
-  ) {
-    document.getElementById("newDataForm").classList.add("hidden");
-    document.getElementById("newDataFormElement").reset();
+// Function to add or remove tags
+function toggleTag(value) {
+  const tagsContainer = document.getElementById("tags-container");
+  // Check if the tag is already selected
+  if (selectedTags.includes(value)) {
+    // Remove the tag
+    selectedTags = selectedTags.filter((tag) => tag !== value);
+
+    // Find the tag element and remove it
+    const tagElement = document.querySelector(`.tag[data-value="${value}"]`);
+    if (tagElement) {
+      tagsContainer.removeChild(tagElement);
+    }
+  } else {
+    selectedTags.push(value);
+
+    // Create a tag element
+    const tagElement = document.createElement("div");
+    tagElement.classList.add("tag");
+    tagElement.setAttribute("data-value", value);
+    tagElement.innerHTML = `${value} <span class="remove-tag">x</span>`;
+
+    // Click remove-tag = remove tag
+    tagElement
+      .querySelector(".remove-tag")
+      .addEventListener("click", function () {
+        toggleTag(value);
+      });
+
+    tagsContainer.appendChild(tagElement);
   }
-  if (
-    document.getElementById("filterForm").classList.contains("hidden") == false
-  ) {
-    document.getElementById("filterForm").classList.add("hidden");
-  }
-  document.getElementById("formTitle").textContent = "New Data";
-});
+}
+
+// Event listener for the select dropdown
+document
+  .getElementById("dataSubjectType")
+  .addEventListener("change", function (event) {
+    const value = event.target.value;
+    if (value) {
+      toggleTag(value);
+
+      // Reset the select value to the placeholder
+      event.target.value = "";
+    }
+  });
