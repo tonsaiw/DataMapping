@@ -77,23 +77,17 @@
               </div>
             </div>
             <div class="form-group">
-              <div>
-                <label for="title" class="form-title">Title</label>
-              </div>
+              <label for="title" class="form-title">Title</label>
               <input type="text" id="title" name="title" placeholder="Enter title" >
             </div>
             
             <div class="form-group">
-              <div>
-                <label for="description">Description</label>
-              </div>
+              <label for="description">Description</label>
               <textarea name="description" id="description" placeholder="Enter description" rows="4" cols="50"></textarea>
             </div>
 
             <div class="form-group">
-              <div>
-                <label for="department">Department</label>
-              </div>
+              <label for="department">Department</label>
               <select id="department" name="department">
                   <option value="" selected disabled hidden>Select department</option>
                   <option value="Human Resources">Human Resources</option>
@@ -104,9 +98,7 @@
 
             <div class="form-group">
               <!-- multi-select dataSubjectType -->
-              <div>
-                <label for="dataSubjectType">Data Subject Type (Optional)</label>
-              </div>
+              <label for="dataSubjectType">Data Subject Type (Optional)</label>
               <div id="tags-container" class="tags-container"></div>
               <select id="dataSubjectType" name="dataSubjectType" >
                 <option value="" selected disabled hidden>Select Data Subject Type</option>
@@ -117,15 +109,23 @@
             </div>
         </form>
     </div>
+    
+    <!-- Filter Form -->
     <div id="filterForm" class="filter-form hidden">
-      <h3>Filter Data</h3>
+      <div class="filter-header">
+        <h2>Filter Data</h2>
+        <div class="filter-actions">
+          <button id="resetFilterBtn" class="btn reset-filter">Reset</button>
+          <button id="applyFilterBtn" class="btn apply-filter">Apply Filter</button>
+        </div>
+      </div>
       <div class="filter-group">
-        <label for="filterTitle">Search Title:</label>
+        <label for="filterTitle">Search Title</label>
         <input type="text" id="filterTitle" placeholder="Search by title">
       </div>
       <div class="filter-group">
-        <label for="filterDepartments">Department:</label>
-        <ul id="filterDepartments">
+        <label for="filterDepartments">Department</label>
+        <ul id="filterDepartments" class="filter-departments">
           <li none><input type="checkbox" value="Human Resources"> Human Resources</li>
           <li><input type="checkbox" value="IT/IS"> IT/IS</li>
           <li><input type="checkbox" value="Admission"> Admission</li>
@@ -133,15 +133,13 @@
         </ul>
       </div>
       <div class="filter-group">
-        <label for="filterDataSubjectType">Data Subject Type:</label>
-        <ul id="filterDataSubjectType">
+        <label for="filterDataSubjectType">Data Subject Type</label>
+        <ul id="filterDataSubjectType" class="filter-dataSubjectType">
           <li><input type="checkbox" value="Employees"> Employees</li>
           <li><input type="checkbox" value="Faculty Staff"> Faculty Staff</li>
           <li><input type="checkbox" value="Students"> Students</li>
         </ul>
       </div>
-      <button id="applyFilterBtn" class="btn apply-filter">Apply Filter</button>
-      <button id="resetFilterBtn" class="btn reset-filter">Reset</button>
     </div>
     
     <div id="overlay" class="overlay hidden"></div>
