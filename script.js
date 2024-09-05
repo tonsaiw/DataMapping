@@ -169,14 +169,25 @@ document
     rows.forEach((row) => {
       const title = row.children[0].textContent;
       const department = row.children[2].textContent;
-      const dataSubject = row.children[3].textContent;
-
       const departmentMatch =
         selectedDepartments.length === 0 ||
         selectedDepartments.includes(department);
-      const dataSubjectMatch =
-        selectedDataSubjects.length === 0 ||
-        selectedDataSubjects.includes(dataSubject);
+
+      const dataSubject = row.children[3].textContent;
+
+      let dataSubjectMatch = null;
+      if (dataSubject.includes(", ")) {
+        const dataSubjectArr = dataSubject.split(", ");
+        dataSubjectMatch =
+          selectedDataSubjects.length === 0 ||
+          dataSubjectArr.some((dataSubject) =>
+            selectedDataSubjects.includes(dataSubject)
+          );
+      } else {
+        dataSubjectMatch =
+          selectedDataSubjects.length === 0 ||
+          selectedDataSubjects.includes(dataSubject);
+      }
       const titleMatch = searchTitle === "" || regex.test(title);
 
       if (departmentMatch && dataSubjectMatch && titleMatch) {
