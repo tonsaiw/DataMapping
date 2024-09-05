@@ -70,44 +70,51 @@
       <div id="newDataForm" class="new-data-form hidden">
         <form id="newDataFormElement">
             <div class="form-header">
-                <h2 id="formTitle">New Data</h2>
-                <div class="form-actions">
-                    <button type="button" id="cancelBtn">Cancel</button>
-                    <button type="submit">Save</button>
-                </div>
+              <h2 id="formTitle">New Data</h2>
+              <div class="form-actions">
+                  <button type="button" id="cancelBtn" class="close-btn">Cancel</button>
+                  <button type="submit" class="submit-btn">Save</button>
+              </div>
             </div>
-            <div>
-              <label for="title">Title</label>
+            <div class="form-group">
+              <div>
+                <label for="title" class="form-title">Title</label>
+              </div>
+              <input type="text" id="title" name="title" placeholder="Enter title" >
             </div>
-            <input type="text" id="title" name="title" placeholder="Enter title">
+            
+            <div class="form-group">
+              <div>
+                <label for="description">Description</label>
+              </div>
+              <textarea name="description" id="description" placeholder="Enter description" rows="4" cols="50"></textarea>
+            </div>
 
-            <div>
-              <label for="description">Description</label>
+            <div class="form-group">
+              <div>
+                <label for="department">Department</label>
+              </div>
+              <select id="department" name="department">
+                  <option value="" selected disabled hidden>Select department</option>
+                  <option value="Human Resources">Human Resources</option>
+                  <option value="IT/IS">IT/IS</option>
+                  <option value="Admission">Admission</option>
+              </select>
             </div>
-            <!-- <input type="text" id="description" name="description" placeholder="Enter description"> -->
-             <textarea name="description" id="description" placeholder="Enter description" rows="4" cols="20"></textarea>
 
-            <div>
-              <label for="department">Department</label>
+            <div class="form-group">
+              <!-- multi-select dataSubjectType -->
+              <div>
+                <label for="dataSubjectType">Data Subject Type (Optional)</label>
+              </div>
+              <div id="tags-container" class="tags-container"></div>
+              <select id="dataSubjectType" name="dataSubjectType" >
+                <option value="" selected disabled hidden>Select Data Subject Type</option>
+                <option value="Employees">Employees</option>
+                <option value="Faculty Staff">Faculty Staff</option>
+                <option value="Students">Students</option>
+              </select>
             </div>
-            <select id="department" name="department">
-                <option value="" selected disabled hidden>Select department</option>
-                <option value="Human Resources">Human Resources</option>
-                <option value="IT/IS">IT/IS</option>
-                <option value="Admission">Admission</option>
-            </select>
-
-            <!-- multi-select dataSubjectType -->
-            <div>
-              <label for="dataSubjectType">Data Subject Type (Optional)</label>
-            </div>
-            <div id="tags-container" class="tags-container"></div>
-            <select id="dataSubjectType" name="dataSubjectType" >
-              <option value="" selected disabled hidden>Select Data Subject Type</option>
-              <option value="Employees">Employees</option>
-              <option value="Faculty Staff">Faculty Staff</option>
-              <option value="Students">Students</option>
-            </select>
         </form>
     </div>
     <div id="filterForm" class="filter-form hidden">
